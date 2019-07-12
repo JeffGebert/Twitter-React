@@ -19,26 +19,25 @@ class New_tweet extends Component {
 		})
 	}
 
-
-
-
 	// Render
 	render() {
 		return (
-			<div class = "new_tweet_box">
+			<div className = "new_tweet_box">
+
 				<form onSubmit={(e) => {
 									this.props.createTweet(e, this.state.text); this.clearTweet()}
 								}>
-								<div class="post_tweet">
-								<input type="text" class="form-control" placeholder="New Tweet" value={this.state.text} onChange={(e) => this.changeTweet(e)}/>
-								<button class="send_tweet" type="button" id="button-addon2">Send</button>
+								<div className="post_tweet">
+									<input type="text" className="form-control" placeholder="New Tweet" value={this.state.text} onChange={(e) => this.changeText(e)}/>
+									<button type="submit" className="send_tweet">Send</button>
 								</div>
 
-								<div class = "hashtags">
-								<span class= "hashtags2">#Birthdays</span>
-								<span class= "hashtags2">#duderella</span>
-								<span class= "hashtags2">#MuayThai</span>
-								<span class="hashtags2" >#GermanGarden</span>
+
+								<div className = "hashtags">
+									<span className= "hashtags2">#Birthdays</span>
+									<span className= "hashtags2">#Duderella</span>
+									<span className= "hashtags2">#MuayThai</span>
+									<span className="hashtags2" >#GermanGarden</span>
 								</div>
 				</form>
 			</div>
@@ -46,5 +45,8 @@ class New_tweet extends Component {
 		)
 	}
 }
+
+
+
 
 export default New_tweet

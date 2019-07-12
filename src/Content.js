@@ -1,23 +1,26 @@
 import React, {Component} from 'react'
 import Latest_tweets from './Latest_tweets'
-import New_tweets from './New_tweets'
+import New_tweet from './New_tweet'
 import './Content.css'
 import axios from 'axios'
 
 class Content extends Component {
 	// Data
 	state = {
-
-				tweets: []
+					tweets: []
 	}
 	// Functions
 
+
 	componentWillMount() {
-			console.log('url',`${process.env.REACT_APP_API}/api/tweets`)
+			console.log(`${process.env.REACT_APP_API}/api/tweets`)
 			axios.get(`${process.env.REACT_APP_API}/api/tweets`).then((res) => {
 				this.setState({
 					tweets: res.data
-				}, console.log('tweets', this.state.tweets))
+				}, console.log('tweetsssssss', this.state.tweets),
+					 console.log('response', res.data)
+
+			)
 
 			}).catch((err) => {
 				console.log('err on component will mount', err)
@@ -37,11 +40,10 @@ class Content extends Component {
 
 
 
-	createMessage = (e, text) => {
+	createTweet = (e, text) => {
 		e.preventDefault()
 		let tweet = {
-			body: text,
-			channel: this.props.channel
+			body: text
 		}
 		axios.post(
 			`${process.env.REACT_APP_API}/api/tweets`,
@@ -50,7 +52,7 @@ class Content extends Component {
 				Authorization: `Bearer ${localStorage.getItem('token')}`
 			}}
 		).then((res) => {
-			let tweet = this.state.tweets
+			let tweets = this.state.tweets
 			tweets.push(res.data)
 			this.setState({tweets})
 		}).catch((err) => {
@@ -62,16 +64,24 @@ class Content extends Component {
 	// Render
 	render() {
 		return (
-			<div class = "contentbox">
-				<div class = "tweet_container">
+			<div className = "contentbox">
+				<div className = "tweet_container">
 					<div id = "tweets">
-						<New_tweets createMessage={this.createMessage}/>
-						<Latest_tweets/>
+							{
+							this.state.tweets.map((m) => {
+								return <Latest_tweets tweets={m} key={m._id} />
+							})
+						 }
 					</div>
 				</div>
 			</div>
 		)
 	}
+
+
 }
+
+
+
 
 export default Content
