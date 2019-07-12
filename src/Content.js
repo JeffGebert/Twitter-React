@@ -1,25 +1,22 @@
 import React, {Component} from 'react'
 import Latest_tweets from './Latest_tweets'
-import Tweets from './Tweets'
+import New_tweets from './New_tweets'
 import './Content.css'
 import axios from 'axios'
 
 class Content extends Component {
 	// Data
 	state = {
-				tweets:[]
+
+				tweets: []
 	}
 	// Functions
 
-	componentDidMount() {
+	componentWillMount() {
 			console.log('url',`${process.env.REACT_APP_API}/api/tweets`)
 			axios.get(`${process.env.REACT_APP_API}/api/tweets`).then((res) => {
-				console.log('res', res.data)
-				let twats = this.state.tweets
-				twats = res.data
-				console.log('twats', twats);
 				this.setState({
-					tweets: twats
+					tweets: res.data
 				}, console.log('tweets', this.state.tweets))
 
 			}).catch((err) => {
@@ -28,7 +25,38 @@ class Content extends Component {
 			})
 		}
 
+	// componentWillReceiveProps(props) {
+	// 	axios.get(`${process.env.REACT_APP_API}/api/messages?channel=${props.channel}`).then((res) => {
+	// 		this.setState({
+	// 			messages: res.data
+	// 		})
+	// 	}).catch((err) => {
+	// 		console.log('err', err)
+	// 	})
+	// }
 
+
+
+	createMessage = (e, text) => {
+		e.preventDefault()
+		let tweet = {
+			body: text,
+			channel: this.props.channel
+		}
+		axios.post(
+			`${process.env.REACT_APP_API}/api/tweets`,
+			tweet,
+			{headers: {
+				Authorization: `Bearer ${localStorage.getItem('token')}`
+			}}
+		).then((res) => {
+			let tweet = this.state.tweets
+			tweets.push(res.data)
+			this.setState({tweets})
+		}).catch((err) => {
+			console.log('err', err)
+		})
+	}
 
 
 	// Render
@@ -36,7 +64,8 @@ class Content extends Component {
 		return (
 			<div class = "contentbox">
 				<div class = "tweet_container">
-					<div class = "tweets">
+					<div id = "tweets">
+						<New_tweets createMessage={this.createMessage}/>
 						<Latest_tweets/>
 					</div>
 				</div>
