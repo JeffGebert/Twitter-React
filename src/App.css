@@ -1,12 +1,34 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	font-family: Lato, sans-serif;
+
 }
 
 #wrap {
-	background: blue;
+	background: white;
 	height: 100vh;
-	display: grid;
-	grid-template-columns: 200px auto;
+	width: 100vw;
+	display:inline-grid;
+
+
+}
+
+
+.home_logout_banner{
+	text-align: center;
+	height:150px;
+	background-image: url('https://res.cloudinary.com/dluvhjltn/image/upload/v1562859201/twitter/twitter_q7ddoz.jpg');
+	padding:0px;
+	background-size:contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
+}
+
+.Tortuga_twitter_page{
+
+}
+
+.logout_button{
+	background-color: green;
 }

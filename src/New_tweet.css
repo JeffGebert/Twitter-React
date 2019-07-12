@@ -1,0 +1,38 @@
+.new_tweet_box{
+
+	background-color:white;
+
+
+}
+
+
+
+.hashtags{
+	background-color: red;
+	text-align: center;
+	margin-left: 10px;
+
+}
+
+.hashtags2{
+
+	margin-left: 10px;
+}
+
+.send_tweet{
+	background-color:blue;
+}
+
+
+.form-control{
+	text-align: center;
+	height:200px;
+	width:506px;
+}
+
+
+.post_tweet{
+	display: flex;
+	justify-content: center;
+
+}
